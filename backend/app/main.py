@@ -790,40 +790,73 @@ def verify_admin(payload: AdminVerifyPayload, request: Request, response: Respon
                 "gym_id": acct["gym_id"], "gym_name": acct.get("gym_name"), "tier": acct.get("tier", "free"),
                 "plan_start": acct.get("plan_start"), "plan_end": acct.get("plan_end"), **_plan_state(acct)}
 
-    # Load stored bcrypt hash from identity.json; fall back to ADMIN_KEY on first boot
+    # Platform admin password:
+    #  • ADMIN_KEY set (Render env)  → it is the password. Changing it on Render and redeploying
+    #    changes the password; any old stored hash is replaced so it can't be used any more.
+    #  • ADMIN_KEY not set          → the bcrypt hash stored on first sign-in is used.
     ident_path = os.path.join(config.DATA_DIR, f"{config.DEFAULT_GYM_ID}.identity.json")
-    stored_hash = ""
+    ident: dict = {}
     try:
         with open(ident_path, "r", encoding="utf-8") as fh:
-            ident = json.load(fh)
-            stored_hash = ident.get("_admin_password_hash", "")
+            ident = json.load(fh) or {}
     except Exception:
-        pass
-
+        ident = {}
+    stored_hash = ident.get("_admin_password_hash", "")
     entered = payload.password.strip()
+    admin_key = (config.ADMIN_KEY or "").strip()
 
-    # First boot: no hash stored yet — accept ADMIN_KEY and persist hash
-    if not stored_hash:
-        if config.ADMIN_KEY and entered == config.ADMIN_KEY:
-            new_hash = hash_password(entered)
+    if admin_key:
+        ok = hmac.compare_digest(entered.encode("utf-8"), admin_key.encode("utf-8"))
+        if ok and not (stored_hash and verify_password(entered, stored_hash)):
             try:
-                ident.setdefault("_admin_password_hash", new_hash)
+                ident["_admin_password_hash"] = hash_password(entered)
                 with open(ident_path, "w", encoding="utf-8") as fh:
                     json.dump(ident, fh, indent=2)
-            except Exception:
-                pass
-            set_admin_cookie(response, config.DEFAULT_GYM_ID)
-            _set_session_cookie(response, request, {"role": "superadmin", "username": "admin", "gym_id": None})
-            return {"status": "ok", "authenticated": True, "username": "admin", "role": "superadmin"}
+            except Exception as e:
+                logger.error(f"Could not store admin password hash: {e}")
+    elif stored_hash:
+        ok = verify_password(entered, stored_hash)
+    else:
+        logger.error("Admin sign-in refused: ADMIN_KEY is not set and no admin password is stored.")
+        ok = False
+
+    if not ok:
         raise HTTPException(401, "Invalid username or password.")
+    set_admin_cookie(response, config.DEFAULT_GYM_ID)
+    _set_session_cookie(response, request, {"role": "superadmin", "username": "admin", "gym_id": None})
+    return {"status": "ok", "authenticated": True, "username": "admin", "role": "superadmin"}
 
-    # Subsequent logins: verify against bcrypt hash
-    if verify_password(entered, stored_hash):
-        set_admin_cookie(response, config.DEFAULT_GYM_ID)
-        _set_session_cookie(response, request, {"role": "superadmin", "username": "admin", "gym_id": None})
-        return {"status": "ok", "authenticated": True, "username": "admin", "role": "superadmin"}
 
-    raise HTTPException(401, "Invalid username or password.")
+@app.get("/api/admin/login-check")
+def admin_login_check():
+    """Safe sign-in diagnostics (no secrets): shows why admin sign-in might fail."""
+    checks = {"code_version": "admin-key-v2"}
+    checks["admin_key_set"] = bool((config.ADMIN_KEY or "").strip())
+    checks["admin_key_length"] = len((config.ADMIN_KEY or "").strip())
+    ident_path = os.path.join(config.DATA_DIR, f"{config.DEFAULT_GYM_ID}.identity.json")
+    try:
+        with open(ident_path, "r", encoding="utf-8") as fh:
+            checks["stored_password_hash"] = bool((json.load(fh) or {}).get("_admin_password_hash"))
+    except Exception:
+        checks["stored_password_hash"] = False
+    try:
+        test = os.path.join(config.DATA_DIR, ".write_test")
+        with open(test, "w") as fh:
+            fh.write("ok")
+        os.remove(test)
+        checks["data_dir_writable"] = True
+    except Exception as e:
+        checks["data_dir_writable"] = False
+        checks["data_dir_error"] = str(e)[:120]
+    checks["data_dir"] = config.DATA_DIR
+    try:
+        checks["bcrypt_ok"] = verify_password("x", hash_password("x"))
+    except Exception as e:
+        checks["bcrypt_ok"] = False
+        checks["bcrypt_error"] = str(e)[:120]
+    checks["session_secret_set"] = bool(getattr(config, "SESSION_SECRET", "") or os.environ.get("SESSION_SECRET"))
+    checks["admin_session_secret_set"] = bool(getattr(config, "ADMIN_SESSION_SECRET", ""))
+    return checks
 
 
 @app.post("/api/admin/logout")

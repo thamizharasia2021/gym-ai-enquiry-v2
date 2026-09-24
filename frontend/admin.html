@@ -267,7 +267,13 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
       rememberSession(me, username);
       window.location.href = landingFor(me);
     } else {
-      errorEl.textContent = data.detail || "Username or password is incorrect.";
+      let msg = typeof data.detail === "string" ? data.detail : "";
+      if(res.status === 401) msg = msg || "Username or password is incorrect.";
+      else if(res.status === 429) msg = msg || "Too many attempts. Please wait a minute and try again.";
+      else if(res.status === 404) msg = "The sign-in service wasn't found (HTTP 404). Check the server is running the latest code.";
+      else if(res.status >= 500) msg = `The server had an error (HTTP ${res.status}). Check the server logs; open /api/admin/login-check for details.`;
+      else msg = msg || `Sign-in failed (HTTP ${res.status}).`;
+      errorEl.textContent = msg;
       errorEl.style.display = "block";
     }
   } catch(err) {

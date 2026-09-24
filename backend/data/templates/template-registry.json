@@ -1,0 +1,36 @@
+{
+  "templates": [
+    {
+      "id": "classic-modern",
+      "name": "Classic Modern",
+      "description": "Clean card-based layout. Great for established gyms with lots of content.",
+      "preview_image": "/static/template-previews/classic-modern.png",
+      "sections_supported": ["hero", "trust_strip", "about", "equipment", "health_diet", "nutrition", "policies", "programs", "facilities", "membership", "trainers", "gallery", "timings", "location", "faq", "trial_cta"],
+      "special_widgets": ["instagram", "reviews", "stats_counter"]
+    },
+    {
+      "id": "bold-hero",
+      "name": "Bold Hero",
+      "description": "Full-screen hero with immersive imagery. Perfect for transformation-focused gyms.",
+      "preview_image": "/static/template-previews/bold-hero.png",
+      "sections_supported": ["hero", "stats_counter", "about", "equipment", "programs", "gallery", "membership", "trainers", "reviews", "instagram", "cta_banner", "timings", "location", "faq", "trial_cta"],
+      "special_widgets": ["stats_counter", "reviews", "instagram", "cta_banner"]
+    },
+    {
+      "id": "minimal-clean",
+      "name": "Minimal Clean",
+      "description": "Whitespace-focused layout. Ideal for boutique studios and premium trainers.",
+      "preview_image": "/static/template-previews/minimal-clean.png",
+      "sections_supported": ["hero", "about", "programs", "membership", "trainers", "gallery", "faq", "trial_cta"],
+      "special_widgets": []
+    },
+    {
+      "id": "vibrant-dark",
+      "name": "Vibrant Dark",
+      "description": "Dark-mode-first with neon gradients. Built for modern urban gyms.",
+      "preview_image": "/static/template-previews/vibrant-dark.png",
+      "sections_supported": ["hero", "stats_counter", "about", "equipment", "programs", "gallery", "membership", "trainers", "reviews", "cta_banner", "faq", "trial_cta"],
+      "special_widgets": ["stats_counter", "reviews", "cta_banner"]
+    }
+  ]
+}

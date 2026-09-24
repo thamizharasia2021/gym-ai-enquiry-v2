@@ -513,6 +513,10 @@ def _set_session_cookie(response: Response, request: Request, payload: dict) -> 
 def _legacy_admin_session(request: Request) -> Optional[dict]:
     """Accept the existing security.require_admin cookie as superadmin (sessions created before
     this change). Only used when it can be called with just the request; fails closed otherwise."""
+    # With no ADMIN_SESSION_SECRET the old cookie would be signed with an empty key and
+    # could be forged — never accept it then.
+    if not getattr(config, "ADMIN_SESSION_SECRET", ""):
+        return None
     try:
         params = inspect.signature(require_admin).parameters
         kwargs = {}

@@ -7,9 +7,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Free tier: force rule-based chat engine, disable LLM (Gemini) to prevent charges
-# Set GEMINI_API_KEY to empty to ensure free-tier rule-based responses only
-GEMINI_API_KEY = ""
+# Gemini (AI answers on Pro/Premium). Free and Basic never call Gemini: that's decided per
+# gym by its tier (schemas.TIER_CONFIGS llm_enabled), not by blanking the key.
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 # AI chat engine defaults (Free tier uses deterministic rule-based matching only)
 GEMINI_EMBED_MODEL = os.getenv("GEMINI_EMBED_MODEL", "gemini-embedding-001")
 GEMINI_CHAT_MODEL = os.getenv("GEMINI_CHAT_MODEL", "gemini-2.0-flash")
@@ -20,8 +20,8 @@ EMBED_DIM = int(os.getenv("EMBED_DIM", "768"))
 APP_DOMAIN = os.getenv("APP_DOMAIN", "tarvos.fit")
 CHAT_SUBDOMAIN = os.getenv("CHAT_SUBDOMAIN", f"chat.{APP_DOMAIN}")
 DEFAULT_GYM_ID = os.getenv("DEFAULT_GYM_ID", "tarvos-fit")
-GYM_NAME = os.getenv("GYM_NAME", "Tarvos Fit")
-GYM_LOCATION = os.getenv("GYM_LOCATION", "Pappanamcode, Trivandrum")
+GYM_NAME = os.getenv("GYM_NAME", "")
+GYM_LOCATION = os.getenv("GYM_LOCATION", "")
 ADMIN_KEY = os.getenv("ADMIN_KEY", "")
 ADMIN_SESSION_SECRET = os.getenv("ADMIN_SESSION_SECRET", "")
 
@@ -54,7 +54,7 @@ VECTOR_BACKEND = os.getenv("VECTOR_BACKEND", "faiss")  # "faiss" | "qdrant"
 QDRANT_URL = os.getenv("QDRANT_URL", "")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY", "")
 
-DATA_DIR = os.getenv("DATA_DIR", os.path.join(os.path.dirname(__file__), "..", "data"))
+DATA_DIR = os.getenv("DATA_DIR", os.path.join(os.path.dirname(__file__), "..", "data"))  # Render: /var/data (persistent disk)
 os.makedirs(DATA_DIR, exist_ok=True)
 
 # WhatsApp Cloud API (Meta) — https://developers.facebook.com/docs/whatsapp/cloud-api
@@ -72,7 +72,7 @@ SMTP_HOST = os.getenv("SMTP_HOST", "")
 SMTP_PORT = int(os.getenv("SMTP_PORT", "587"))
 SMTP_USER = os.getenv("SMTP_USER", "")
 SMTP_PASSWORD = os.getenv("SMTP_PASSWORD", "")
-SMTP_FROM = os.getenv("SMTP_FROM", os.getenv("SMTP_USER", "noreply@tarvos.fit"))
+SMTP_FROM = os.getenv("SMTP_FROM", os.getenv("SMTP_USER", ""))
 SMTP_USE_TLS = os.getenv("SMTP_USE_TLS", "true").lower() in ("true", "1", "yes")
 SMTP_USE_SSL = os.getenv("SMTP_USE_SSL", "false").lower() in ("true", "1", "yes")
 
@@ -86,3 +86,16 @@ INSTAGRAM_USER_ID = os.getenv("INSTAGRAM_USER_ID", "")
 CHUNK_SIZE_CHARS = int(os.getenv("CHUNK_SIZE_CHARS", "1200"))
 CHUNK_OVERLAP_CHARS = int(os.getenv("CHUNK_OVERLAP_CHARS", "150"))
 TOP_K = int(os.getenv("TOP_K", "5"))
+
+# --- Multi-gym hosting (read in main.py) -------------------------------------------
+SESSION_SECRET = os.getenv("SESSION_SECRET", "")          # signs login cookies; set in production
+SITE_BASE_DOMAIN = os.getenv("SITE_BASE_DOMAIN", "arivayyaai.com")   # gym1.arivayyaai.com
+SITE_SCHEME = os.getenv("SITE_SCHEME", "https")
+SITE_URL_MODE = os.getenv("SITE_URL_MODE", "auto")         # auto | subdomain | path
+
+# --- WhatsApp templates & lead retention (read in leads_manager.py) -----------------
+WHATSAPP_LEAD_ALERT_TEMPLATE = os.getenv("WHATSAPP_LEAD_ALERT_TEMPLATE", "")
+WHATSAPP_LEAD_WELCOME_TEMPLATE = os.getenv("WHATSAPP_LEAD_WELCOME_TEMPLATE", "")
+WHATSAPP_TEMPLATE_LANG = os.getenv("WHATSAPP_TEMPLATE_LANG", "en")
+WHATSAPP_API_VERSION = os.getenv("WHATSAPP_API_VERSION", "v20.0")
+LEAD_RETENTION_DAYS = int(os.getenv("LEAD_RETENTION_DAYS", "90"))

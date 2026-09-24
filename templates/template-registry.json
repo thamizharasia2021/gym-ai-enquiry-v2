@@ -1,0 +1,39 @@
+{
+  "templates": [
+    {
+      "id": "classic-modern",
+      "name": "Classic Modern",
+      "description": "Clean card-based layout. Great for established gyms with lots of content.",
+      "sections_supported": ["hero", "trust_strip", "about", "equipment", "health_diet", "nutrition", "policies", "programs", "facilities", "membership", "trainers", "gallery", "timings", "location", "faq", "trial_cta"],
+      "special_widgets": ["instagram", "reviews", "stats_counter"]
+    },
+    {
+      "id": "tarvos-fit-pulse",
+      "name": "Tarvos Fit Pulse",
+      "description": "Dark premium design with gradient accents",
+      "sections_supported": ["hero", "about", "services", "pricing", "gallery", "testimonials", "contact", "chat"],
+      "special_widgets": []
+    },
+    {
+      "id": "tarvos-fit-ironworks",
+      "name": "Tarvos Fit Ironworks",
+      "description": "Bold industrial gym aesthetic",
+      "sections_supported": ["hero", "about", "services", "pricing", "gallery", "testimonials", "contact", "chat"],
+      "special_widgets": []
+    },
+    {
+      "id": "tarvos-fit-form-function",
+      "name": "Tarvos Fit Form & Function",
+      "description": "Minimalist performance-focused layout",
+      "sections_supported": ["hero", "about", "services", "pricing", "gallery", "testimonials", "contact", "chat"],
+      "special_widgets": []
+    },
+    {
+      "id": "tarvos-fit-sage-house",
+      "name": "Tarvos Fit Sage House",
+      "description": "Earthy wellness-focused design",
+      "sections_supported": ["hero", "about", "services", "pricing", "gallery", "testimonials", "contact", "chat"],
+      "special_widgets": []
+    }
+  ]
+}

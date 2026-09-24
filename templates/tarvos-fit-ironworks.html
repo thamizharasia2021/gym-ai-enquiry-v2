@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tarvos Fit — Pappanamcode, Trivandrum</title>
+<meta name="description" content="Tarvos Fit — Trivandrum's #1 rated gym. 38+ machines, certified coaches, personal training, weight loss, muscle building and family programs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#17140f; --panel:#1f1b14; --ink:#f2ede1; --muted:#a89f8d; --line:#3b342a;
+    --accent:#f2b705; --accent2:#c2410c;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Barlow',sans-serif;padding-bottom:72px;}
+  a{color:inherit;text-decoration:none}
+  img,svg{max-width:100%;}
+  .wrap{max-width:1320px;margin:0 auto;padding:0 24px;}
+  .eyebrow{font-family:'Barlow',sans-serif;font-weight:700;font-size:12px;letter-spacing:.14em;color:var(--accent);text-transform:uppercase;}
+  h1,h2,h3,h4{font-family:'Anton',sans-serif;text-transform:uppercase;line-height:1;margin:0;font-weight:400;}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:15px 26px;font-weight:800;font-size:14px;letter-spacing:.03em;text-transform:uppercase;border-radius:2px;cursor:pointer;border:none;}
+  .btn-primary{background:var(--accent);color:var(--bg);}
+  .btn-outline{border:2px solid var(--ink);color:var(--ink);background:transparent;}
+  .card{background:var(--panel);border:1px solid var(--line);padding:26px;position:relative;}
+  .card:before{content:"";position:absolute;top:-1px;left:-1px;width:14px;height:14px;border-top:2px solid var(--accent);border-left:2px solid var(--accent);}
+  .hazard{background:repeating-linear-gradient(135deg,var(--accent),var(--accent) 18px,var(--bg) 18px,var(--bg) 36px);height:10px;}
+  .tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border:1px solid var(--accent);color:var(--accent);}
+  .chip{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);padding:14px 18px;font-size:13.5px;font-weight:600;color:#d8d0c1;}
+  .grid{display:grid;gap:2px;background:var(--line);border:1px solid var(--line);}
+  .g-auto{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
+  section{padding:76px 0;}
+  .section-alt{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  nav{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--line);}
+  .navbar{height:82px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
+  .logo{font-family:'Anton',sans-serif;font-size:22px;}
+  .nav-links{display:flex;gap:20px;font-weight:600;font-size:12.5px;color:#cbc3b4;flex-wrap:wrap;}
+  .hero{display:flex;gap:56px;align-items:center;flex-wrap:wrap;padding:64px 0;}
+  .hero-copy{flex:1 1 420px;}
+  .hero h1{font-size:clamp(42px,7vw,92px);}
+  .stat-grid{flex:1 1 380px;}
+  .stat-box{background:var(--bg);padding:28px 22px;}
+  .stat-num{font-family:'Anton',sans-serif;font-size:44px;color:var(--accent);}
+  .stat-label{font-size:12.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:6px;}
+  .pricing-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:36px;}
+  .facilities-strip{display:flex;justify-content:space-between;flex-wrap:wrap;gap:18px;padding:44px 0;}
+  .facilities-strip div{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px;}
+  details{background:var(--panel);border:1px solid var(--line);padding:18px 20px;}
+  details summary{cursor:pointer;font-weight:700;font-size:15px;list-style:none;display:flex;justify-content:space-between;align-items:center;}
+  details summary::-webkit-details-marker{display:none;}
+  details p{margin:12px 0 0;font-size:13.5px;color:var(--muted);}
+  .gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:2px;background:var(--line);border:1px solid var(--line);}
+  .gallery-tile{background:var(--panel);aspect-ratio:1;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;}
+  .visit-grid{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+  .contact-cols{display:flex;gap:48px;flex-wrap:wrap;}
+  .map-box{width:100%;height:220px;border:1px solid var(--line);overflow:hidden;margin-top:16px;}
+  footer{border-top:1px solid var(--line);padding-top:22px;display:flex;justify-content:space-between;font-size:13px;color:#7a7261;flex-wrap:wrap;gap:8px;}
+  /* chat widget */
+  .fab{position:fixed;right:24px;bottom:88px;width:56px;height:56px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;z-index:999;}
+  .chat-panel{position:fixed;right:24px;bottom:156px;width:300px;max-width:88vw;background:var(--panel);border:1px solid var(--accent);padding:20px;display:none;z-index:999;}
+  .chat-panel.open{display:block;}
+  .chat-head{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .chat-badge{width:34px;height:34px;background:var(--accent);color:var(--bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .bubble-user{background:var(--bg);border:1px solid var(--line);padding:10px 12px;font-size:12.5px;color:#d8d0c1;margin-bottom:8px;}
+  .bubble-bot{background:#2a2417;border:1px solid var(--accent);padding:10px 12px;font-size:12.5px;}
+  .chat-close{position:absolute;top:10px;right:12px;background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;}
+  /* mobile action bar */
+  .mobile-bar{position:fixed;left:0;right:0;bottom:0;height:64px;background:#0e0c08;border-top:1px solid var(--line);display:flex;z-index:998;}
+  .mobile-bar a{flex:1;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;text-transform:uppercase;}
+  .mobile-bar a.wa{background:var(--panel);}
+  .mobile-bar a.trial{background:var(--accent);color:var(--bg);}
+  @media (max-width:900px){
+    .nav-links{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap navbar">
+    <div class="logo">TARVOS <span style="color:var(--accent);">FIT</span></div>
+    <div class="nav-links">
+      <a href="#about">About</a><a href="#equipment">Equipment</a><a href="#programs">Programs</a><a href="#facilities">Facilities</a><a href="#pricing">Plans</a><a href="#trainers">Trainers</a><a href="#faq">FAQ</a><a href="#visit">Visit</a>
+    </div>
+    <a href="tel:+917012854261" class="btn btn-primary" style="padding:11px 20px;font-size:12px;">Call the Floor</a>
+  </div>
+</nav>
+<div class="hazard"></div>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow">Rated #1 Gym · Pappanamcode, Trivandrum</div>
+      <h1 style="margin-top:18px;">Train like<br>the work<br><span style="color:var(--accent);">matters.</span></h1>
+      <p style="font-size:18px;line-height:1.6;color:#d8d0c1;max-width:520px;margin:26px 0 32px;">Trivandrum's most disciplined gym floor — 38+ machines, certified coaches, and programming with zero wasted reps.</p>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <a href="https://wa.me/917356551321?text=Hi%20Tarvos%20Fit%2C%20I%27d%20like%20to%20claim%20a%20free%20trial%20day." class="btn btn-primary">Book a Free Trial</a>
+        <a href="tel:+917012854261" class="btn btn-outline">070128 54261</a>
+      </div>
+    </div>
+    <div class="stat-grid g-auto" style="gap:2px;background:var(--line);border:1px solid var(--line);">
+      <div class="stat-box"><div class="stat-num">500+</div><div class="stat-label">Active members</div></div>
+      <div class="stat-box"><div class="stat-num">38+</div><div class="stat-label">Machines on the floor</div></div>
+      <div class="stat-box"><div class="stat-num">#1</div><div class="stat-label">Rated gym, Trivandrum</div></div>
+      <div class="stat-box"><div class="stat-num" style="font-size:30px;">5AM–10PM</div><div class="stat-label">Monday to Saturday</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="hazard"></div>
+
+<section id="about" class="wrap">
+  <div class="tag">About Us</div>
+  <h2 style="font-size:clamp(28px,4vw,40px);margin-top:16px;">Everything you need to reach your peak</h2>
+  <p style="color:var(--muted);font-size:15.5px;max-width:640px;margin-top:12px;">Premier fitness and personal training center in Trivandrum.</p>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:36px;">
+    <div class="card">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f2b705" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <h4 style="font-size:18px;margin:16px 0 8px;">Prime Location</h4>
+      <p style="font-size:14px;color:var(--muted);line-height:1.6;margin:0;">Tarvos Fit, Pappanamcode Junction, Trivandrum.</p>
+    </div>
+    <div class="card">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f2b705" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="9" width="3" height="6" rx="1"/><rect x="20" y="9" width="3" height="6" rx="1"/><rect x="6" y="7" width="2.5" height="10" rx="1"/><rect x="15.5" y="7" width="2.5" height="10" rx="1"/><line x1="8.5" y1="12" x2="15.5" y2="12"/></svg>
+      <h4 style="font-size:18px;margin:16px 0 8px;">Dedicated Coaching</h4>
+      <p style="font-size:14px;color:var(--muted);line-height:1.6;margin:0;">Custom training for fat loss, muscle building and functional mobility.</p>
+    </div>
+    <div class="card">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f2b705" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <h4 style="font-size:18px;margin:16px 0 8px;">500+ Members</h4>
+      <p style="font-size:14px;color:var(--muted);line-height:1.6;margin:0;">A trained floor of regulars, beginners and athletes alike.</p>
+    </div>
+  </div>
+</section>
+
+<section id="equipment" class="section-alt">
+  <div class="wrap">
+    <div class="tag">Training Floor</div>
+    <h2 style="font-size:clamp(28px,4vw,40px);margin-top:16px;">State-of-the-art equipment</h2>
+    <div class="g-auto" style="margin-top:32px;">
+      <div class="chip">Free Weights</div>
+      <div class="chip">Strength Machines</div>
+      <div class="chip">Cardio Zone</div>
+      <div class="chip">Functional Rig</div>
+      <div class="chip">Lifting Platform</div>
+      <div class="chip">Recovery Area</div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
+    <div class="card">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f2b705" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3c8 0 15 7 15 15-8 0-15-7-15-15z"/><path d="M6 3c0 8 4 12 9 12"/></svg>
+      <div class="tag" style="margin-top:16px;">Health &amp; Diet</div>
+      <h4 style="font-size:18px;margin:14px 0 8px;">Custom Nutrition Plans</h4>
+      <p style="font-size:14px;color:var(--muted);line-height:1.6;margin:0;">Personalized meal guidance for fat loss, lean gain or stamina — plus injury-aware coaching.</p>
+    </div>
+    <div class="card">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f2b705" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6M10 2v3l-3 4v11a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V9l-3-4V2"/></svg>
+      <div class="tag" style="margin-top:16px;">Nutrition Store</div>
+      <h4 style="font-size:18px;margin:14px 0 8px;">Supplement Support</h4>
+      <p style="font-size:14px;color:var(--muted);line-height:1.6;margin:0;">Whey, pre-workout, BCAAs and multivitamins available on-site, coach-recommended.</p>
+    </div>
+    <div class="card">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f2b705" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5.25 3.4 9.74 8 11 4.6-1.26 8-5.75 8-11V5l-8-3z"/><path d="M9 12l2 2 4-4"/></svg>
+      <div class="tag" style="margin-top:16px;">Policies &amp; Hygiene</div>
+      <h4 style="font-size:18px;margin:14px 0 8px;">Sanitized, Fair-Use Floor</h4>
+      <p style="font-size:14px;color:var(--muted);line-height:1.6;margin:0;">Equipment disinfected multiple times daily; clear gym-floor etiquette for every member.</p>
+    </div>
+  </div>
+</section>
+
+<section id="programs" class="section-alt">
+  <div class="wrap">
+    <div class="tag">Programs</div>
+    <h2 style="font-size:clamp(30px,4vw,44px);margin-top:16px;">Four ways to get stronger</h2>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:36px;">
+      <div class="card" style="background:var(--bg);">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#f2b705" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="9" width="3" height="6" rx="1"/><rect x="20" y="9" width="3" height="6" rx="1"/><rect x="6" y="7" width="2.5" height="10" rx="1"/><rect x="15.5" y="7" width="2.5" height="10" rx="1"/><line x1="8.5" y1="12" x2="15.5" y2="12"/></svg>
+        <h4 style="font-size:20px;margin:18px 0 10px;">Personal Training</h4>
+        <p style="font-size:14.5px;color:var(--muted);line-height:1.6;">1-on-1 coaching, form correction, and programming built around your goal.</p>
+      </div>
+      <div class="card" style="background:var(--bg);">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#f2b705" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <h4 style="font-size:20px;margin:18px 0 10px;">Weight Loss</h4>
+        <p style="font-size:14.5px;color:var(--muted);line-height:1.6;">Structured fat-loss training paired with real nutrition guidance.</p>
+      </div>
+      <div class="card" style="background:var(--bg);">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#f2b705" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <h4 style="font-size:20px;margin:18px 0 10px;">Muscle Building</h4>
+        <p style="font-size:14.5px;color:var(--muted);line-height:1.6;">Progressive strength and hypertrophy programming, tracked weekly.</p>
+      </div>
+      <div class="card" style="background:var(--bg);">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#f2b705" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <h4 style="font-size:20px;margin:18px 0 10px;">Couple &amp; Kids</h4>
+        <p style="font-size:14.5px;color:var(--muted);line-height:1.6;">Train together, or enrol your kids in supervised youth sessions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="facilities" class="wrap">
+  <div class="facilities-strip">
+    <div><span style="color:var(--accent);">AC</span> Training Floor</div>
+    <div><span style="color:var(--accent);">38+</span> Equipment Stations</div>
+    <div><span style="color:var(--accent);">Daily</span> Sanitized Floor</div>
+    <div><span style="color:var(--accent);">Free</span> Showers &amp; Lockers</div>
+    <div><span style="color:var(--accent);">Free</span> Trial Day</div>
+  </div>
+</section>
+
+<section id="pricing" class="wrap" style="border-top:1px solid var(--line);">
+  <div class="tag">Membership</div>
+  <h2 style="font-size:clamp(30px,4vw,44px);margin-top:16px;">Transparent pricing. No surprises.</h2>
+  <div class="pricing-grid">
+    <div class="card"><div style="font-size:13px;color:var(--muted);text-transform:uppercase;">Monthly</div><div style="font-family:'Anton',sans-serif;font-size:36px;margin:12px 0 4px;">₹1,999</div><div style="font-size:12px;color:#7a7261;">per month</div></div>
+    <div class="card" style="border-color:var(--accent);">
+      <div class="tag" style="position:absolute;top:-13px;left:24px;background:var(--bg);">Most Popular</div>
+      <div style="font-size:13px;color:var(--muted);text-transform:uppercase;margin-top:6px;">3-Month</div>
+      <div style="font-family:'Anton',sans-serif;font-size:36px;margin:12px 0 4px;color:var(--accent);">₹3,999</div>
+      <div style="font-size:12px;color:#7a7261;">per 3 months</div>
+    </div>
+    <div class="card"><div style="font-size:13px;color:var(--muted);text-transform:uppercase;">Yearly</div><div style="font-family:'Anton',sans-serif;font-size:36px;margin:12px 0 4px;">₹9,999</div><div style="font-size:12px;color:var(--accent2);font-weight:700;">Save ₹3,000</div></div>
+    <div class="card"><div style="font-size:13px;color:var(--muted);text-transform:uppercase;">Couple</div><div style="font-family:'Anton',sans-serif;font-size:36px;margin:12px 0 4px;">₹3,499</div><div style="font-size:12px;color:#7a7261;">per month, 2 people</div></div>
+    <div class="card"><div style="font-size:13px;color:var(--muted);text-transform:uppercase;">Kids</div><div style="font-family:'Anton',sans-serif;font-size:36px;margin:12px 0 4px;">₹999</div><div style="font-size:12px;color:#7a7261;">per month</div></div>
+  </div>
+</section>
+
+<div class="hazard"></div>
+
+<section id="trainers" class="section-alt">
+  <div class="wrap">
+    <div class="tag">The Coaches</div>
+    <h2 style="font-size:clamp(28px,4vw,40px);margin-top:16px;">Meet your certified trainers</h2>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:36px;">
+      <div class="card" style="background:var(--bg);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f2b705" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5 6 22l6-3 6 3-2.5-8.5"/></svg><h4 style="font-size:18px;margin:16px 0 6px;">Strength &amp; Conditioning</h4><p style="font-size:13.5px;color:var(--muted);">Certified S&amp;C coach, 8+ years floor experience.</p></div>
+      <div class="card" style="background:var(--bg);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f2b705" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5 6 22l6-3 6 3-2.5-8.5"/></svg><h4 style="font-size:18px;margin:16px 0 6px;">Nutrition Coach</h4><p style="font-size:13.5px;color:var(--muted);">Diet planning for fat-loss and lean-gain goals.</p></div>
+      <div class="card" style="background:var(--bg);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f2b705" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5 6 22l6-3 6 3-2.5-8.5"/></svg><h4 style="font-size:18px;margin:16px 0 6px;">Group &amp; Kids Coach</h4><p style="font-size:13.5px;color:var(--muted);">Runs couple sessions and supervised youth fitness.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="tag">Gallery</div>
+  <h2 style="font-size:clamp(28px,4vw,40px);margin-top:16px;">Gym floor &amp; facility</h2>
+  <div class="gallery-grid" style="margin-top:32px;">
+    <div class="gallery-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f2b705" stroke-width="1.6"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span style="font-size:11px;color:var(--muted);">Free Weights</span></div>
+    <div class="gallery-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f2b705" stroke-width="1.6"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span style="font-size:11px;color:var(--muted);">Cardio Zone</span></div>
+    <div class="gallery-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f2b705" stroke-width="1.6"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span style="font-size:11px;color:var(--muted);">Training Floor</span></div>
+    <div class="gallery-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f2b705" stroke-width="1.6"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span style="font-size:11px;color:var(--muted);">Machines</span></div>
+    <div class="gallery-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f2b705" stroke-width="1.6"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span style="font-size:11px;color:var(--muted);">Group Area</span></div>
+    <div class="gallery-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f2b705" stroke-width="1.6"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span style="font-size:11px;color:var(--muted);">Reception</span></div>
+  </div>
+</section>
+
+<section id="faq" class="section-alt">
+  <div class="wrap">
+    <div class="tag">Questions</div>
+    <h2 style="font-size:clamp(28px,4vw,40px);margin-top:16px;">Common questions answered</h2>
+    <div class="g-auto" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:32px;">
+      <details><summary>Is there a free trial? <span>+</span></summary><p>Yes — walk in for a one-day free trial pass, any day we're open.</p></details>
+      <details><summary>What's included in membership? <span>+</span></summary><p>Full floor access, all machines, and locker &amp; shower use.</p></details>
+      <details><summary>Do you offer personal training? <span>+</span></summary><p>Yes, 1-on-1 coaching is available alongside every plan.</p></details>
+      <details><summary>What are your timings? <span>+</span></summary><p>Monday to Saturday, 5:00 AM to 10:00 PM.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" style="text-align:center;">
+  <h2 style="font-size:clamp(28px,4vw,42px);">Get your 1-day free trial pass</h2>
+  <p style="color:var(--muted);font-size:15.5px;margin:14px 0 26px;">No card, no pressure — just a look at how we train.</p>
+  <a href="https://wa.me/917356551321?text=Hi%20Tarvos%20Fit%2C%20I%27d%20like%20to%20claim%20a%20free%20trial%20day." class="btn btn-primary">Claim Your Trial</a>
+</section>
+
+<div class="hazard"></div>
+
+<section id="visit" class="section-alt">
+  <div class="wrap">
+    <div class="visit-grid">
+      <div style="max-width:420px;">
+        <div class="tag">Visit the floor</div>
+        <h3 style="font-size:34px;margin:16px 0 18px;">Find us in<br>Pappanamcode.</h3>
+        <div class="map-box"><iframe width="100%" height="100%" style="border:0;" loading="lazy" allowfullscreen src="https://maps.google.com/maps?q=Tarvos%20Fit%20Trivandrum&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe></div>
+      </div>
+      <div class="contact-cols">
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;color:var(--accent);margin-bottom:10px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span style="font-size:12px;font-weight:800;text-transform:uppercase;">Location</span></div>
+          <p style="font-size:14.5px;color:#d8d0c1;line-height:1.6;max-width:220px;margin:0;">Tarvos Fit, Pappanamcode Junction, Trivandrum, Kerala 695018</p>
+        </div>
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;color:var(--accent);margin-bottom:10px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span style="font-size:12px;font-weight:800;text-transform:uppercase;">Hours</span></div>
+          <p style="font-size:14.5px;color:#d8d0c1;line-height:1.6;margin:0;">Mon – Sat<br>5:00 AM – 10:00 PM</p>
+        </div>
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;color:var(--accent);margin-bottom:10px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span style="font-size:12px;font-weight:800;text-transform:uppercase;">Contact</span></div>
+          <p style="font-size:14.5px;color:#d8d0c1;line-height:1.6;margin:0;">+91 70128 54261<br>@tarvos.fit</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap" style="padding-bottom:32px;">
+  <span>© Tarvos Fit, Trivandrum</span>
+  <span>About · Equipment · Programs · Facilities · Plans · Trainers · FAQ · Visit</span>
+</footer>
+
+<!-- AI ASSISTANT WIDGET -->
+<div class="chat-panel" id="chatPanel">
+  <button class="chat-close" id="chatClose">&times;</button>
+  <div class="chat-head">
+    <div class="chat-badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+    <div><div style="font-weight:800;font-size:13.5px;">Tarvos Fit Assistant</div><div style="font-size:11px;color:var(--muted);">Instant answers, day or night</div></div>
+  </div>
+  <div class="bubble-user">What are your membership plans?</div>
+  <div class="bubble-bot">We've got Monthly, 3-Month, Yearly, Couple and Kids plans — want the full breakdown?</div>
+  <!-- To connect your live assistant, replace this static preview with your iframe/chat backend and set its src via the chatUrl variable in the script below. -->
+</div>
+<button class="fab" id="chatFab" aria-label="Open chat assistant">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#17140f" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+</button>
+
+<!-- MOBILE ACTION BAR -->
+<div class="mobile-bar">
+  <a href="tel:+917012854261">Call</a>
+  <a href="https://wa.me/917356551321" class="wa">WhatsApp</a>
+  <a href="#pricing" class="trial">Free Trial</a>
+</div>
+
+<script>
+  // var chatUrl = "https://your-assistant-backend.example.com"; // plug your Gym Assistant URL here
+  var fab = document.getElementById("chatFab");
+  var panel = document.getElementById("chatPanel");
+  var closeBtn = document.getElementById("chatClose");
+  fab.addEventListener("click", function(){ panel.classList.toggle("open"); });
+  closeBtn.addEventListener("click", function(){ panel.classList.remove("open"); });
+</script>
+
+</body>
+</html>
